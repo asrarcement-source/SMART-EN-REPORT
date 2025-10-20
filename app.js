@@ -3,8 +3,9 @@
 // When demonstrating with an OpenAI endpoint, set REPORT_API_URL to "https://api.openai.com/v1/chat/completions"
 // and place your API key in REPORT_API_KEY.  The analysis will then call the external service to generate
 // professional recommendations based on the report data.
-const REPORT_API_URL = '';
-const REPORT_API_KEY = '';
+const REPORT_API_URL = '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';
+const REPORT_API_KEY = 'https://api.openai.com/v1
+';
 
 // Optional: specify a logo to appear at the top of printed reports.  Place the file in your project root (e.g., "logo.png")
 // and set this constant to its relative URL.  If left blank, no logo will be shown.
