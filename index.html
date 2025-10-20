@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BS EN 197-1:2011 - Cement Standards Interactive Guide</title>
+    <meta name="description" content="Comprehensive interactive guide to BS EN 197-1:2011 cement standards, with a built-in precision calculator and analysis engines.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="cement-mixer"></div>
+        <h2>Loading Cement Standards...</h2>
+        <p>BS EN 197-1:2011 Interactive Guide</p>
+    </div>
+    <div class="progress-indicator"><div class="progress-bar" id="progressBar"></div></div>
+    <header>
+        <nav>
+            <div class="logo"><i class="fas fa-industry"></i><span>Cement Standards</span></div>
+            <ul class="nav-links">
+                <li><a href="#overview" class="nav-link active">Overview</a></li>
+                <li><a href="#cement-types" class="nav-link">Cement Types</a></li>
+                <li><a href="#constituents" class="nav-link">Constituents</a></li>
+                <li><a href="#strength-classes" class="nav-link">Strength Classes</a></li>
+                <li><a href="#requirements" class="nav-link">Requirements</a></li>
+                <!-- Added link to the calculators dashboard -->
+                <li><a href="#dashboard" class="nav-link">Calculators</a></li>
+                <li><a href="#" class="nav-link nav-simulator-btn" id="navLaunchSimulator">Mix Simulator</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle" title="Toggle dark/light theme"></button>
+                <div class="mobile-menu" id="mobileMenu"><span></span><span></span><span></span></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="overview" class="section">
+            <div class="container">
+                <div class="hero">
+                    <div class="hero-text">
+                        <h1>BS EN 197-1:2011</h1>
+                        <h2>Interactive Cement Standards Guide</h2>
+                        <p>An advanced guide to the 34 cement types. Explore compositions, requirements, and calculate precise formulations.</p>
+                        <div class="search-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Search by name, family, application...">
+                        </div>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="simulator-launch-container">
+                            <button class="simulator-btn report-btn" id="launchReportGeneratorBtn"><i class="fas fa-print"></i> Generate Daily Quality Report</button>
+                        </div>
+                        <div class="stat"><div id="totalTypesCount" class="stat-number">34</div><div class="stat-label">Cement Types</div></div>
+                        <div class="stat"><div class="stat-number">5</div><div class="stat-label">Main Families</div></div>
+                        <div class="stat"><div class="stat-number">9</div><div class="stat-label">Strength Variants</div></div>
+                    </div>
+                </div>
+                <div class="section-header"><h2 id="charts">Data Visualization</h2><p>Visual analysis of cement distribution and strength requirements.</p></div>
+                <div class="grid-2 chart-grid">
+                    <div class="chart-container"><canvas id="compositionChart"></canvas></div>
+                    <div class="chart-container"><canvas id="strengthChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="cement-types" class="section">
+            <div class="container">
+                <div class="section-header"><h2>Explore All Cement Types</h2><p>Filter the comprehensive list of 34 cement types based on their category.</p></div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all" id="filterAll">All Types (34)</button>
+                    <button class="filter-btn" data-filter="common" id="filterCommon">Common (27)</button>
+                    <button class="filter-btn" data-filter="sulfate" id="filterSulfate">Sulfate Resistant (7)</button>
+                    <button class="filter-btn" data-filter="lowEarly-link" id="filterLowEarly">Low Early Strength (3)</button>
+                </div>
+                <div id="cementTypesGrid" class="grid-3"></div>
+            </div>
+        </section>
+
+        <section id="constituents" class="section"><div class="container"><div class="section-header"><h2>Main Constituents</h2><p>The building blocks of modern cement.</p></div><div id="constituentsGrid" class="grid-3"></div></div></section>
+        <section id="strength-classes" class="section"><div class="container"><div class="section-header"><h2>Strength Classes</h2><p>Performance benchmarks for strength development.</p></div><div id="strengthClassesGrid" class="grid-3"></div></div></section>
+        <section id="requirements" class="section"><div class="container"><div class="section-header"><h2>General Requirements</h2><p>Core standards that ensure cement quality.</p></div><div id="requirementsGrid" class="grid-2"></div></div></section>
+
+        <!-- Newly added calculators dashboard section -->
+        <section id="dashboard" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Calculators Dashboard</h2>
+                    <p>Interactive calculators for all main constituents and process parameters.</p>
+                </div>
+                <div id="dashboardGrid" class="grid-3"></div>
+            </div>
+        </section>
+    </main>
+   <footer class="credits">
+    <div class="container">
+        <div class="credits-grid">
+            <div>
+                <h3>Prepared By</h3>
+                <div class="main-credit">
+                    <p class="credit-name">Mr. Fadi M. Darwesh</p>
+                    <p class="credit-title">QC & R&D Specialist</p>
+                    <div class="contact-info">
+                        <a href="mailto:asrar.cement@gmail.com" id="preparedEmail" class="icon-link">
+                            <i class="fas fa-envelope"></i> asrar.cement@gmail.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="approver-info">
+                <h3>Checked & Approved By</h3>
+                <div class="main-credit">
+                    <p class="credit-name">Mr.Emil E.Batarseh</p>
+                    <p class="credit-title">Director of Northern Cement Laboratories</p>
+                    <p class="credit-subtitle">Quality Assurance & Standards Compliance</p>
+                </div>
+            </div>
+        </div>
+        <p class="credit-verified">Technical Review & Validation Complete. All data verified against BS EN 197-1:2011 original standard.</p>
+    </div>
+</footer>
+
+
+    <div class="modal" id="detailModal"><div class="modal-content"><span class="modal-close-btn" id="modalClose">&times;</span><div id="modalContent"></div></div></div>
+    <div class="modal" id="calculatorModal"><div class="modal-content large"><span class="modal-close-btn" id="calculatorModalClose">&times;</span><div id="calculatorContent"></div></div></div>
+    
+    <script src="app.js" defer></script>
+    
+    
+</body>
+</html>
